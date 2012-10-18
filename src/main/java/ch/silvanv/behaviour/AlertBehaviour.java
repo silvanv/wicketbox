@@ -1,32 +1,45 @@
 package ch.silvanv.behaviour;
 
 import org.apache.wicket.Component;
-import org.apache.wicket.ajax.AbstractDefaultAjaxBehavior;
+import org.apache.wicket.ajax.AjaxEventBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.attributes.AjaxCallListener;
 import org.apache.wicket.ajax.attributes.AjaxRequestAttributes;
 import org.apache.wicket.ajax.attributes.IAjaxCallListener;
 
-public class AlertBehaviour extends AbstractDefaultAjaxBehavior {
-	private static final long serialVersionUID = 1L;
+public class AlertBehaviour extends AjaxEventBehavior {
 
-	// TODO why it does not work
-	@Override
-	protected void updateAjaxAttributes(AjaxRequestAttributes attributes) {
-		super.updateAjaxAttributes(attributes);
+    public AlertBehaviour() {
+        super("click");
+    }
 
-		IAjaxCallListener listener = new AjaxCallListener() {
-			private static final long serialVersionUID = 1L;
+    public AlertBehaviour(String event) {
+        super(event);
+    }
 
-			@Override
-	        public CharSequence getBeforeHandler(Component c) {
-	        	return "alert('click2 ajax callback')"; 
-	        }
-	    };
-	    attributes.getAjaxCallListeners().add(listener);
-	}
-	
-	@Override
-	protected void respond(AjaxRequestTarget target) {
-	}
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    protected void updateAjaxAttributes(AjaxRequestAttributes attributes) {
+        super.updateAjaxAttributes(attributes);
+
+        IAjaxCallListener listener = new AjaxCallListener() {
+
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public CharSequence getBeforeHandler(Component c) {
+                return "alert('click2 ajax callback')";
+            }
+        };
+        attributes.getAjaxCallListeners().add(listener);
+
+        // AjaxCallListener ajaxCallListener = new AjaxCallListener();
+        // ajaxCallListener.onBefore("alert('click2 ajax callback')");
+        // attributes.getAjaxCallListeners().add(ajaxCallListener);
+    }
+
+    @Override
+    protected void onEvent(AjaxRequestTarget target) {
+    }
 }
