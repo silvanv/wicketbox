@@ -1,6 +1,7 @@
 package ch.silvanv.facebookfeed;
 
-import org.apache.wicket.markup.html.WebPage;
+import ch.silvanv.common.BasePage;
+
 import org.apache.wicket.markup.html.link.ExternalLink;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.link.PopupSettings;
@@ -9,7 +10,7 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class FacebookFeedPage extends WebPage {
+public class FacebookFeedPage extends BasePage {
 
     private static final long serialVersionUID = 1L;
     private static final Logger LOG = LoggerFactory.getLogger(FacebookFeedPage.class);

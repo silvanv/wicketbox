@@ -1,6 +1,9 @@
 package ch.silvanv.formpage;
 
-import org.apache.wicket.markup.html.WebPage;
+import ch.silvanv.Task;
+import ch.silvanv.common.BasePage;
+import ch.silvanv.common.Feedback;
+
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
@@ -10,10 +13,7 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 
-import ch.silvanv.Task;
-import ch.silvanv.common.Feedback;
-
-public class FormPage extends WebPage {
+public class FormPage extends BasePage {
 
     private static final long serialVersionUID = 1L;
 
@@ -32,11 +32,12 @@ public class FormPage extends WebPage {
             add(feedback);
 
             final Form<Task> form = new Form<Task>("form", new CompoundPropertyModel<Task>(new Task("the task name"))) {
+
                 private static final long serialVersionUID = 1L;
 
                 @Override
                 public void onSubmit() {
-                	feedback.info("Form data [form]: " + getModelObject());
+                    feedback.info("Form data [form]: " + getModelObject());
                     setModel(new CompoundPropertyModel<Task>(new Task("the task name1")));
                 }
 
@@ -50,11 +51,12 @@ public class FormPage extends WebPage {
 
             final IModel<Task> t2 = Model.of(new Task("the task name"));
             final Form<Task> form2 = new Form<Task>("form2", t2) {
+
                 private static final long serialVersionUID = 1L;
 
                 @Override
                 public void onSubmit() {
-                	feedback.info("Form data [form]: " + getModelObject());
+                    feedback.info("Form data [form]: " + getModelObject());
 
                     // change model don't work because the fields have a reference to the first model
                     // setModel(Model.of(new Task("hhhhh")));
@@ -74,4 +76,3 @@ public class FormPage extends WebPage {
         }
     }
 }
-
