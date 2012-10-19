@@ -3,6 +3,7 @@ package ch.silvanv;
 import ch.silvanv.behaviour.BehaviourPage;
 import ch.silvanv.facebookfeed.FacebookFeedPage;
 import ch.silvanv.formpage.FormPage;
+import ch.silvanv.modal.ModalPage;
 import ch.silvanv.tabbedcontainer.TabbedPage;
 
 import org.apache.wicket.protocol.http.WebApplication;
@@ -34,6 +35,7 @@ public class WicketApplication extends WebApplication {
         mountPage("FormPage", FormPage.class);
         mountPage("FacebookFeedPage", FacebookFeedPage.class);
         mountPage("BehaviourPage", BehaviourPage.class);
+        mountPage("ModalPage", ModalPage.class);
 
         // configuration
     }

@@ -1,5 +1,6 @@
 package ch.silvanv.behaviour;
 
+import ch.silvanv.common.BasePage;
 import ch.silvanv.common.Feedback;
 
 import org.apache.wicket.Component;
@@ -8,9 +9,8 @@ import org.apache.wicket.ajax.attributes.AjaxCallListener;
 import org.apache.wicket.ajax.attributes.AjaxRequestAttributes;
 import org.apache.wicket.ajax.attributes.IAjaxCallListener;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
-import org.apache.wicket.markup.html.WebPage;
 
-public class BehaviourPage extends WebPage {
+public class BehaviourPage extends BasePage {
 
     private static final long serialVersionUID = 1L;
 
