@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+	<head>
+		<meta charset="utf-8" />
+		<title>Apache Wicket Test</title>
+		<link rel="stylesheet" href="style.css" type="text/css" />
+	</head>
+	<body>
+		<div class="container">
+			<a href="/"><h3>WicketBox</h3></a>
+		
+			<div class="navbar">
+				<div class="navbar-inner">
+					<ul class="nav">
+						<li><a wicket:id = "tabbedPageLink">TabbedPage</a></li>
+						<li><a wicket:id = "formPageLink">FormPage</a></li>
+               	 		<li><a wicket:id = "facebookFeedPageLink">FacebookFeedPage</a></li>
+               	 		<li><a wicket:id = "behaviourPageLink">BehaviourPage</a></li>
+                        <li><a wicket:id = "modalPageLink">ModalPage</a></li>                        
+					</ul>
+				</div>
+			</div>
+            
+            <div class="container">
+                <wicket:child />
+            </div>
+            
+		</div>
+	</body>
+</html>
+
