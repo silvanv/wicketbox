@@ -1,0 +1,21 @@
+<wicket:panel>
+    <!-- modal dialog -->
+    <div wicket:id="modalDialog" class="modal hide fade" id="mail2FriendDialog" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
+        <div class="modal-header">
+            <a href="#" class="icon delete" data-dismiss="modal" aria-hidden="true">Schliessen</a>
+            <h2 id="modal-label" wicket:id="modalLabel">Überschrift im Modal Dialog</h2>
+        </div>
+
+        <div class="modal-body">
+            <div wicket:id="contentPanel">
+                <?php display_panel('page/offer/common/Mail2FriendPanel.html'); ?>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Schliessen</a>
+            <a wicket:id="modalSubmit" class="btn btn-primary" data-submit="modalSubmit" data-submit-events="click" aria-hidden="true">Senden</a>
+        </div>
+    </div>
+    <!-- /modal dialog -->
+</wicket:panel>
