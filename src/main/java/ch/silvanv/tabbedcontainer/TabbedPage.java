@@ -1,5 +1,9 @@
 package ch.silvanv.tabbedcontainer;
 
+import ch.silvanv.Task;
+import ch.silvanv.common.BasePage;
+import ch.silvanv.common.Feedback;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,16 +12,12 @@ import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.extensions.ajax.markup.html.tabs.AjaxTabbedPanel;
 import org.apache.wicket.extensions.markup.html.tabs.AbstractTab;
 import org.apache.wicket.extensions.markup.html.tabs.ITab;
-import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 
-import ch.silvanv.Task;
-import ch.silvanv.common.Feedback;
-
-public class TabbedPage extends WebPage {
+public class TabbedPage extends BasePage {
 
     private static final long serialVersionUID = 1L;
 
@@ -77,7 +77,7 @@ public class TabbedPage extends WebPage {
             super(id);
 
             final Feedback feedbackPanel = new Feedback("feedback");
-			add(feedbackPanel);
+            add(feedbackPanel);
 
             add(new Label("label", Model.of("bla")));
 
