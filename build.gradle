@@ -20,5 +20,4 @@ dependencies {
   compile 'javax.servlet:servlet-api:2.4'
 
   testCompile 'junit:junit:4.8.2'
-
 }
