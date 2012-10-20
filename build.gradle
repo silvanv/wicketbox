@@ -1,0 +1,24 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'jetty'
+apply plugin: 'eclipse'
+
+group = 'ch.silvanv'
+version = '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets.main.resources.srcDirs 'src/main/java'
+
+dependencies {
+   
+  compile 'org.apache.wicket:wicket-core:6.1.1'
+  compile 'org.apache.wicket:wicket-extensions:6.1.1'
+
+  compile 'javax.servlet:servlet-api:2.4'
+
+  testCompile 'junit:junit:4.8.2'
+
+}
