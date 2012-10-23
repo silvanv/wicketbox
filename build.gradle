@@ -12,6 +12,8 @@ repositories {
 
 sourceSets.main.resources.srcDirs 'src/main/java'
 
+jettyRun.scanIntervalSeconds=1
+
 dependencies {
    
   compile 'org.apache.wicket:wicket-core:6.1.1'
