@@ -94,6 +94,6 @@ public abstract class ModalDialogPanel<T> extends GenericPanel<T> {
 	@Override
 	public void renderHead(IHeaderResponse response) 
 	{
-		response.render(new  JavaScriptUrlReferenceHeaderItem("js/bootstrap.js", "bootstrap", false, "UTF-8", null));	
+		response.render(new JavaScriptUrlReferenceHeaderItem("js/bootstrap.js", "bootstrap", false, "UTF-8", null));
 	}
 }
