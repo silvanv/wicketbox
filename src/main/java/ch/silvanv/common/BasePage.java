@@ -1,13 +1,13 @@
 package ch.silvanv.common;
 
+import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.markup.html.link.BookmarkablePageLink;
+
 import ch.silvanv.behaviour.BehaviourPage;
 import ch.silvanv.facebookfeed.FacebookFeedPage;
 import ch.silvanv.formpage.FormPage;
 import ch.silvanv.modal.ModalPage;
 import ch.silvanv.tabbedcontainer.TabbedPage;
-
-import org.apache.wicket.markup.html.WebPage;
-import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 
 public abstract class BasePage extends WebPage {
 

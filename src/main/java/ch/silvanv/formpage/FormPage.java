@@ -48,7 +48,6 @@ public class FormPage extends BasePage {
             add(form);
 
             // //////////////////////////////////////////////////////7
-
             final IModel<Task> t2 = Model.of(new Task("the task name"));
             final Form<Task> form2 = new Form<Task>("form2", t2) {
 

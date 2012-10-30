@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ch.silvanv.HomePage;
-import ch.silvanv.WicketApplication;
+import ch.silvanv.WicketboxApplication;
 
 /**
  * Simple test using the WicketTester
@@ -17,7 +17,7 @@ public class TestHomePage
 	@Before
 	public void setUp()
 	{
-		tester = new WicketTester(new WicketApplication());
+		tester = new WicketTester(new WicketboxApplication());
 	}
 
 	@Test

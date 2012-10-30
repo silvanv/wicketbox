@@ -7,6 +7,8 @@ package ch.silvanv.modal;
 import org.apache.wicket.Component;
 import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.markup.ComponentTag;
+import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.JavaScriptUrlReferenceHeaderItem;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.AbstractLink;
 import org.apache.wicket.markup.html.panel.GenericPanel;
@@ -47,7 +49,8 @@ public abstract class ModalDialogPanel<T> extends GenericPanel<T> {
      */
     public ModalDialogPanel(final String id, IModel<T> model, String labelKey) {
         super(id, model);
-
+        setRenderBodyOnly(true);
+        
         MarkupContainer modalDialog = new MarkupContainer("modalDialog") {
 
             private static final long serialVersionUID = 1L;
@@ -87,4 +90,10 @@ public abstract class ModalDialogPanel<T> extends GenericPanel<T> {
      * @return The content
      */
     public abstract Component content(String id);
+    
+	@Override
+	public void renderHead(IHeaderResponse response) 
+	{
+		response.render(new  JavaScriptUrlReferenceHeaderItem("js/bootstrap.js", "bootstrap", false, "UTF-8", null));	
+	}
 }

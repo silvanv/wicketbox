@@ -15,9 +15,8 @@ sourceSets.main.resources.srcDirs 'src/main/java'
 jettyRun.scanIntervalSeconds=1
 
 dependencies {
-   
-  compile 'org.apache.wicket:wicket-core:6.1.1'
-  compile 'org.apache.wicket:wicket-extensions:6.1.1'
+  compile 'org.apache.wicket:wicket-core:6.2.0'
+  compile 'org.apache.wicket:wicket-extensions:6.2.0'
 
   compile 'javax.servlet:servlet-api:2.4'
 

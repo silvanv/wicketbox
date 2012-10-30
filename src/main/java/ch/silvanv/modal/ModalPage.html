@@ -6,8 +6,18 @@
             <div class="container">
                 <h5>Modal Page</h5>
                 
-                    <a href="#modalDialog1" data-toggle="modal" class="btn btn-small btn-primary">Modal 1</a>
-                    <div wicket:id="modalDialog1"></div>
+                <div class="btn-toolbar">
+                <div class="btn-group">
+	                	<a wicket:id="modalDialogLink1" href="#" class="btn">Modal 1</a>
+	            </div>
+	            <div class="btn-group">
+	                	<a wicket:id="modalDialogLink2" href="#" class="btn">Modal 2</a>
+                </div>
+                </div>
+	            
+	            <span wicket:id="modalDialog1"></span>
+	            <span wicket:id="modalDialog2"></span>
+
             </div>
          </wicket:extend>
     </body>
