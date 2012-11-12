@@ -82,7 +82,7 @@ public abstract class ModalDialog<T> extends GenericPanel<T> {
             @Override
             public void onClick(AjaxRequestTarget target) {
                 if (onSubmit()) {
-                    target.appendJavaScript("$('#" + ModalDialog.this.getId() + "').modal('hide')");
+                    target.appendJavaScript(modalHideCommand());
                 }
             }
         });
@@ -91,6 +91,14 @@ public abstract class ModalDialog<T> extends GenericPanel<T> {
         modalDialog.add(content("contentPanel"));
 
         add(modalDialog);
+    }
+
+    protected String modalHideCommand() {
+        return "$('#" + ModalDialog.this.getId() + "').modal('hide')";
+    }
+
+    protected String modalShowCommand() {
+        return "$('#" + ModalDialog.this.getId() + "').modal('show')";
     }
 
     @Override
