@@ -6,11 +6,12 @@ package ch.silvanv.modal;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.MarkupContainer;
-import org.apache.wicket.markup.ComponentTag;
+import org.apache.wicket.ajax.AjaxEventBehavior;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptUrlReferenceHeaderItem;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.link.AbstractLink;
 import org.apache.wicket.markup.html.panel.GenericPanel;
 import org.apache.wicket.model.IModel;
 
@@ -21,7 +22,7 @@ import org.apache.wicket.model.IModel;
  *            type
  * @author silvan
  */
-public abstract class ModalDialogPanel<T> extends GenericPanel<T> {
+public abstract class ModalDialog<T> extends GenericPanel<T> {
 
     private static final long serialVersionUID = 1L;
 
@@ -33,8 +34,8 @@ public abstract class ModalDialogPanel<T> extends GenericPanel<T> {
      * @param labelKey
      *            An string resource key for the dialog label
      */
-    public ModalDialogPanel(final String id, String labelKey) {
-        this(id, null, labelKey);
+    public ModalDialog(final String id, String label) {
+        this(id, null, label);
     }
 
     /**
@@ -47,10 +48,10 @@ public abstract class ModalDialogPanel<T> extends GenericPanel<T> {
      * @param labelKey
      *            An string resource key for the dialog label
      */
-    public ModalDialogPanel(final String id, IModel<T> model, String labelKey) {
+    public ModalDialog(final String id, IModel<T> model, String label) {
         super(id, model);
         setRenderBodyOnly(true);
-        
+
         MarkupContainer modalDialog = new MarkupContainer("modalDialog") {
 
             private static final long serialVersionUID = 1L;
@@ -62,24 +63,46 @@ public abstract class ModalDialogPanel<T> extends GenericPanel<T> {
             }
         };
 
-        // TODO introduce the onCancel method
-
-        // TODO optionally make an ajax link with a corresponding onSubmit method
-        modalDialog.add(new AbstractLink("modalSubmit") {
+        // close event
+        modalDialog.add(new AjaxEventBehavior("hidden") {
 
             private static final long serialVersionUID = 1L;
 
             @Override
-            protected void onComponentTag(ComponentTag tag) {
-                super.onComponentTag(tag);
-                tag.put("data-submit", "submit-" + id);
+            protected void onEvent(AjaxRequestTarget target) {
+                onClose();
             }
         });
 
-        modalDialog.add(new Label("modalLabel", labelKey));
+        // submit event
+        modalDialog.add(new AjaxLink<Void>("modalSubmit") {
+
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public void onClick(AjaxRequestTarget target) {
+                if (onSubmit()) {
+                    target.appendJavaScript("$('#" + ModalDialog.this.getId() + "').modal('hide')");
+                }
+            }
+        });
+
+        modalDialog.add(new Label("modalLabel", label));
         modalDialog.add(content("contentPanel"));
 
         add(modalDialog);
+    }
+
+    @Override
+    public void renderHead(IHeaderResponse response) {
+        response.render(new JavaScriptUrlReferenceHeaderItem("js/bootstrap.js", "bootstrap", false, "UTF-8", null));
+    }
+
+    protected void onClose() {
+    }
+
+    protected boolean onSubmit() {
+        return true;
     }
 
     /**
@@ -90,10 +113,4 @@ public abstract class ModalDialogPanel<T> extends GenericPanel<T> {
      * @return The content
      */
     public abstract Component content(String id);
-    
-	@Override
-	public void renderHead(IHeaderResponse response) 
-	{
-		response.render(new JavaScriptUrlReferenceHeaderItem("js/bootstrap.js", "bootstrap", false, "UTF-8", null));
-	}
 }

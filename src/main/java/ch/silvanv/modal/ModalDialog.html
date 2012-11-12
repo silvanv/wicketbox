@@ -1,0 +1,20 @@
+<wicket:panel>
+    <!-- modal dialog -->
+    <div wicket:id="modalDialog" class="modal hide fade" tabindex="-1" >
+        <div class="modal-header">
+            <a href="#" class="icon delete" data-dismiss="modal">X</a>
+            <h2 id="modal-label" wicket:id="modalLabel">Modal Dialog Titel</h2>
+        </div>
+
+        <div class="modal-body">
+            <div wicket:id="contentPanel">
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <a href="#" class="btn" data-dismiss="modal">Schliessen</a>
+            <a wicket:id="modalSubmit" href="#" class="btn btn-primary">Senden</a>
+        </div>
+    </div>
+    <!-- /modal dialog -->
+</wicket:panel>

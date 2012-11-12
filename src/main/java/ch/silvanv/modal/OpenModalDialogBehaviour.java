@@ -1,16 +1,16 @@
 package ch.silvanv.modal;
 
-import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxEventBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.attributes.AjaxCallListener;
 import org.apache.wicket.ajax.attributes.AjaxRequestAttributes;
-import org.apache.wicket.ajax.attributes.IAjaxCallListener;
 
 public class OpenModalDialogBehaviour extends AjaxEventBehavior {
 
-	private String dialogId;
-	
+    private static final long serialVersionUID = 1L;
+
+    private String dialogId;
+
     public OpenModalDialogBehaviour(String dialogId) {
         this(dialogId, "click");
     }
@@ -20,26 +20,12 @@ public class OpenModalDialogBehaviour extends AjaxEventBehavior {
         this.dialogId = dialogId;
     }
 
-    private static final long serialVersionUID = 1L;
-
     @Override
     protected void updateAjaxAttributes(AjaxRequestAttributes attributes) {
         super.updateAjaxAttributes(attributes);
-
-        IAjaxCallListener listener = new AjaxCallListener() {
-
-            private static final long serialVersionUID = 1L;
-
-            @Override
-            public CharSequence getBeforeHandler(Component c) {
-                return "$('#" + dialogId + "').modal('show')";
-            }
-        };
-        attributes.getAjaxCallListeners().add(listener);
-
-        // AjaxCallListener ajaxCallListener = new AjaxCallListener();
-        // ajaxCallListener.onBefore("alert('click2 ajax callback')");
-        // attributes.getAjaxCallListeners().add(ajaxCallListener);
+        AjaxCallListener ajaxCallListener = new AjaxCallListener();
+        ajaxCallListener.onBefore("$('#" + dialogId + "').modal('show')");
+        attributes.getAjaxCallListeners().add(ajaxCallListener);
     }
 
     @Override
