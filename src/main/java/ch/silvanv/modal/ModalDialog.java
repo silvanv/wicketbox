@@ -8,10 +8,11 @@ import org.apache.wicket.Component;
 import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.ajax.AjaxEventBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.markup.html.AjaxLink;
+import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptUrlReferenceHeaderItem;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.panel.GenericPanel;
 import org.apache.wicket.model.IModel;
 
@@ -19,24 +20,13 @@ import org.apache.wicket.model.IModel;
  * Modal dialog panel.
  * 
  * @param <T>
- *            type
+ *            model type
  * @author silvan
  */
 public abstract class ModalDialog<T> extends GenericPanel<T> {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * Create the modal panel.
-     * 
-     * @param id
-     *            Id
-     * @param labelKey
-     *            An string resource key for the dialog label
-     */
-    public ModalDialog(final String id, String label) {
-        this(id, null, label);
-    }
 
     /**
      * Create the modal dialog panel.
@@ -50,7 +40,8 @@ public abstract class ModalDialog<T> extends GenericPanel<T> {
      */
     public ModalDialog(final String id, IModel<T> model, String label) {
         super(id, model);
-        setRenderBodyOnly(true);
+//        setRenderBodyOnly(true);
+        setOutputMarkupId(true);
 
         MarkupContainer modalDialog = new MarkupContainer("modalDialog") {
 
@@ -62,38 +53,54 @@ public abstract class ModalDialog<T> extends GenericPanel<T> {
                 setMarkupId(id);
             }
         };
+        modalDialog.add(new Label("modalLabel", label));
 
+        Form<T> form = new Form<T>("modalForm", model);
+        modalDialog.add(form);
+        
+        // content
+        form.add(content("contentPanel"));
+        
+		// submit button
+        modalDialog.add(new AjaxSubmitLink("modalSubmit", form) {
+
+            private static final long serialVersionUID = 1L;
+
+            @SuppressWarnings("unchecked")
+			@Override
+            protected void onError(AjaxRequestTarget target, Form<?> form) {
+            	ModalDialog.this.onError(target, (Form<T>) form);
+            	target.add(form);
+            }
+            
+            @SuppressWarnings("unchecked")
+			@Override
+            protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
+            	if (ModalDialog.this.onSubmit(target, (Form<T>) form)) {
+            		target.appendJavaScript(modalHideCommand());
+            	}
+            	
+            	// TODO always refresh the whole parent?
+            	// target.add(ModalDialog.this.getParent());
+            }
+        });
+        
         // close event
         modalDialog.add(new AjaxEventBehavior("hidden") {
-
-            private static final long serialVersionUID = 1L;
-
-            @Override
-            protected void onEvent(AjaxRequestTarget target) {
-                onClose();
-            }
+        	
+        	private static final long serialVersionUID = 1L;
+        	
+        	@Override
+        	protected void onEvent(AjaxRequestTarget target) {
+        		onClose();
+        		target.add(ModalDialog.this);
+        	}
         });
-
-        // submit event
-        modalDialog.add(new AjaxLink<Void>("modalSubmit") {
-
-            private static final long serialVersionUID = 1L;
-
-            @Override
-            public void onClick(AjaxRequestTarget target) {
-                if (onSubmit()) {
-                    target.appendJavaScript(modalHideCommand());
-                }
-            }
-        });
-
-        modalDialog.add(new Label("modalLabel", label));
-        modalDialog.add(content("contentPanel"));
 
         add(modalDialog);
     }
 
-    protected String modalHideCommand() {
+	protected String modalHideCommand() {
         return "$('#" + ModalDialog.this.getId() + "').modal('hide')";
     }
 
@@ -108,8 +115,11 @@ public abstract class ModalDialog<T> extends GenericPanel<T> {
 
     protected void onClose() {
     }
+    
+    protected void onError(AjaxRequestTarget target, Form<T> form) {
+    }
 
-    protected boolean onSubmit() {
+    protected boolean onSubmit(AjaxRequestTarget target, Form<T> form) {
         return true;
     }
 

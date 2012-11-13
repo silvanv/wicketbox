@@ -7,11 +7,10 @@ public class Task
 
     private static final long serialVersionUID = 1L;
 
-    private String name;
+    private String name = "default name";
     private String desc;
 
     public Task() {
-        name = null;
     }
 
     public Task(String name) {
