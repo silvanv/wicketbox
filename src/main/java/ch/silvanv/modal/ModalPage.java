@@ -2,6 +2,8 @@ package ch.silvanv.modal;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.feedback.ComponentFeedbackMessageFilter;
+import org.apache.wicket.feedback.ContainerFeedbackMessageFilter;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
@@ -22,11 +24,10 @@ public class ModalPage extends BasePage {
     
     public ModalPage() {
 
-        // TODO move to page
-        feedback = new Feedback("feedback");
+        feedback = new Feedback("feedback", new ComponentFeedbackMessageFilter(this));
         add(feedback);
     	
-        final ModalDialog<String> dialog1 = new ModalDialog<String>("modalDialog1", Model.of("Dialog Content 1"), "modalDialogTitle") {
+        final ModalDialog<String> dialog1 = new ModalDialog<String>("modalDialog1", Model.of("Dialog Content 1"), Model.of("modalDialogTitle")) {
 
             private static final long serialVersionUID = 1L;
 
@@ -41,7 +42,7 @@ public class ModalPage extends BasePage {
 
         // //////////////////
 
-        final ModalDialog<Task> dialog2 = new ModalDialog<Task>("modalDialog2", new CompoundPropertyModel<Task>(new Task()), "modalDialogTitle") {
+        final ModalDialog<Task> dialog2 = new ModalDialog<Task>("modalDialog2", new CompoundPropertyModel<Task>(new Task()), Model.of("modalDialogTitle")) {
 
             private static final long serialVersionUID = 1L;
             
@@ -69,32 +70,27 @@ public class ModalPage extends BasePage {
         public FormPanel(String id, IModel<Task> model) {
             super(id, model);
 
-            final Feedback modalFeedback = new Feedback("modalFeedback");
-            add(modalFeedback);
-
             final Form<Task> form = new Form<Task>("form", getModel()) {
 
                 private static final long serialVersionUID = 1L;
-
-                @Override
-                protected void onError() {
-                	modalFeedback.error("Form data error [form]: " + getModelObject());
-                    
-                    System.out.println("form onerror");
-                }
                 
                 @Override
                 public void onSubmit() {
-                	ModalPage.this.feedback.info("Form data [form]: " + getModelObject());
-                    setModelObject(new Task());
-                    
-                    System.out.println("form onsubmit");
+                	if ("aaa".equals(getModelObject().getDesc())) {
+                		error("aaa not allowed");
+                	} else {
+                		ModalPage.this.info("Form data [form]: " + getModelObject());
+                		setModelObject(new Task());
+                	}
                 }
 
             };
             form.add(new TextField<String>("name").setRequired(true));
             form.add(new TextField<String>("desc").setRequired(true));
             add(form);
+
+            final Feedback modalFeedback = new Feedback("modalFeedback", new ContainerFeedbackMessageFilter(form));
+            form.add(modalFeedback);
         }
     }
 

@@ -35,12 +35,12 @@ public abstract class ModalDialog<T> extends GenericPanel<T> {
      *            Id
      * @param model
      *            The model
-     * @param labelKey
-     *            An string resource key for the dialog label
+     * @param label
+     *            An string model for the dialog label
      */
-    public ModalDialog(final String id, IModel<T> model, String label) {
+    public ModalDialog(final String id, IModel<T> model, IModel<String> label) {
         super(id, model);
-//        setRenderBodyOnly(true);
+        // setRenderBodyOnly(true);
         setOutputMarkupId(true);
 
         MarkupContainer modalDialog = new MarkupContainer("modalDialog") {
@@ -55,7 +55,7 @@ public abstract class ModalDialog<T> extends GenericPanel<T> {
         };
         modalDialog.add(new Label("modalLabel", label));
 
-        Form<T> form = new Form<T>("modalForm", model);
+        final Form<T> form = new Form<T>("modalForm", model);
         modalDialog.add(form);
         
         // content
@@ -75,13 +75,15 @@ public abstract class ModalDialog<T> extends GenericPanel<T> {
             
             @SuppressWarnings("unchecked")
 			@Override
-            protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-            	if (ModalDialog.this.onSubmit(target, (Form<T>) form)) {
+            protected void onAfterSubmit(AjaxRequestTarget target, Form<?> form) {
+            	if (ModalDialog.this.onSubmit(target, (Form<T>) form) && !form.hasError()) {
             		target.appendJavaScript(modalHideCommand());
+            		
+            		// TODO always refresh the whole parent?
+            		// target.add(ModalDialog.this.getParent());
+            	} else {
+            		onError(target, form);
             	}
-            	
-            	// TODO always refresh the whole parent?
-            	// target.add(ModalDialog.this.getParent());
             }
         });
         
@@ -100,10 +102,18 @@ public abstract class ModalDialog<T> extends GenericPanel<T> {
         add(modalDialog);
     }
 
+    /**
+     * Javascript to hide this modal dialog.
+     * @return The script
+     */
 	protected String modalHideCommand() {
         return "$('#" + ModalDialog.this.getId() + "').modal('hide')";
     }
 
+	/**
+     * Javascript to show this modal dialog.
+     * @return The script
+	 */
     protected String modalShowCommand() {
         return "$('#" + ModalDialog.this.getId() + "').modal('show')";
     }
@@ -113,21 +123,35 @@ public abstract class ModalDialog<T> extends GenericPanel<T> {
         response.render(new JavaScriptUrlReferenceHeaderItem("js/bootstrap.js", "bootstrap", false, "UTF-8", null));
     }
 
+    /**
+     * Called when the modal dialog was closed. Can be overwritten if needed.
+     */
     protected void onClose() {
     }
     
+    /**
+     * Called on an error. Can be overwritten if needed.
+     * @param target ajax target
+     * @param form the modal dialog form
+     */
     protected void onError(AjaxRequestTarget target, Form<T> form) {
     }
 
+    /**
+     * Called on successful submit. Can be overwritten if needed.
+     * @param target ajax target
+     * @param form the modal dialog form
+     * @return True if the submit was successful
+     */
     protected boolean onSubmit(AjaxRequestTarget target, Form<T> form) {
         return true;
     }
 
     /**
-     * Content factory.
+     * Content factory. Must be overwritten by the implementation.
      * 
      * @param id
-     *            The id for the new panel
+     *            The id for the new component
      * @return The content
      */
     public abstract Component content(String id);

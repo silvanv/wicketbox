@@ -9,7 +9,7 @@ public class ModalDialogLink extends AjaxLink<Void> {
 
     public ModalDialogLink(String id, ModalDialog<?> dialog) {
         super(id);
-        add(new OpenModalDialogBehaviour(dialog.getId()));
+        add(new OpenModalDialogBehavior(dialog));
     }
 
     @Override

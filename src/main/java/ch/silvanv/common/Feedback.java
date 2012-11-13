@@ -17,7 +17,7 @@ public class Feedback extends FeedbackPanel {
 	
     @Override
     protected void onConfigure() {
-        if (hasFeedbackMessage()) {
+        if (anyMessage()) {
             setVisibilityAllowed(true);
         }
         else {
