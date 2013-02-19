@@ -17,81 +17,76 @@ import ch.silvanv.common.BasePage;
 import ch.silvanv.common.Feedback;
 
 public class ModalPage extends BasePage {
+	private static final long serialVersionUID = 1L;
 
-    private static final long serialVersionUID = 1L;
+	private final Feedback feedback;
 
-    private final Feedback feedback;
-    
-    public ModalPage() {
+	public ModalPage() {
+		feedback = new Feedback("feedback", new ComponentFeedbackMessageFilter(this));
+		add(feedback);
 
-        feedback = new Feedback("feedback", new ComponentFeedbackMessageFilter(this));
-        add(feedback);
-    	
-        final ModalDialog<String> dialog1 = new ModalDialog<String>("modalDialog1", Model.of("Dialog Content 1"), Model.of("modalDialogTitle")) {
+		final ModalDialog<String> dialog1 = new ModalDialog<String>("modalDialog1", Model.of("Dialog Content 1"), Model.of("modalDialogTitle")) {
 
-            private static final long serialVersionUID = 1L;
+			private static final long serialVersionUID = 1L;
 
-            @Override
-            public Component content(String id) {
-                return new Label("contentPanel", getModel());
-            }
-        };
+			@Override
+			public Component content(String id) {
+				return new Label("contentPanel", getModel());
+			}
+		};
 
-        add(dialog1);
-        add(new ModalDialogLink("modalDialogLink1", dialog1));
+		add(dialog1);
+		add(new ModalDialogLink("modalDialogLink1", dialog1));
 
-        // //////////////////
+		// //////////////////
 
-        final ModalDialog<Task> dialog2 = new ModalDialog<Task>("modalDialog2", new CompoundPropertyModel<Task>(new Task()), Model.of("modalDialogTitle")) {
+		final ModalDialog<Task> dialog2 = new ModalDialog<Task>("modalDialog2", new CompoundPropertyModel<Task>(new Task()), Model.of("modalDialogTitle")) {
+			private static final long serialVersionUID = 1L;
 
-            private static final long serialVersionUID = 1L;
-            
-            @Override
-            public Component content(String id) {
-                return new FormPanel(id, getModel());
-            }
-            
-            // overwritten to refresh feedback
-        	@Override
-        	protected boolean onSubmit(AjaxRequestTarget target, Form<Task> form) {
-            	target.add(feedback);
-            	return super.onSubmit(target, form);
-        	}
-        };
+			@Override
+			public Component content(String id) {
+				return new FormPanel(id, getModel());
+			}
 
-        add(dialog2);
-        add(new ModalDialogLink("modalDialogLink2", dialog2));
-    }
+			// overwritten to refresh feedback
+			@Override
+			protected boolean onSubmit(AjaxRequestTarget target, Form<Task> form) {
+				target.add(feedback);
+				return super.onSubmit(target, form);
+			}
+		};
 
-    private class FormPanel extends GenericPanel<Task> {
+		add(dialog2);
+		add(new ModalDialogLink("modalDialogLink2", dialog2));
+	}
 
-        private static final long serialVersionUID = 1L;
+	private class FormPanel extends GenericPanel<Task> {
+		private static final long serialVersionUID = 1L;
 
-        public FormPanel(String id, IModel<Task> model) {
-            super(id, model);
+		public FormPanel(String id, IModel<Task> model) {
+			super(id, model);
 
-            final Form<Task> form = new Form<Task>("form", getModel()) {
+			final Form<Task> form = new Form<Task>("form", getModel()) {
 
-                private static final long serialVersionUID = 1L;
-                
-                @Override
-                public void onSubmit() {
-                	if ("aaa".equals(getModelObject().getDesc())) {
-                		error("aaa not allowed");
-                	} else {
-                		ModalPage.this.info("Form data [form]: " + getModelObject());
-                		setModelObject(new Task());
-                	}
-                }
+				private static final long serialVersionUID = 1L;
 
-            };
-            form.add(new TextField<String>("name").setRequired(true));
-            form.add(new TextField<String>("desc").setRequired(true));
-            add(form);
+				@Override
+				public void onSubmit() {
+					if ("aaa".equals(getModelObject().getDesc())) {
+						error("aaa not allowed");
+					} else {
+						ModalPage.this.info("Form data [form]: " + getModelObject());
+						setModelObject(new Task());
+					}
+				}
 
-            final Feedback modalFeedback = new Feedback("modalFeedback", new ContainerFeedbackMessageFilter(form));
-            form.add(modalFeedback);
-        }
-    }
+			};
+			form.add(new TextField<String>("name").setRequired(true));
+			form.add(new TextField<String>("desc").setRequired(true));
+			add(form);
 
+			final Feedback modalFeedback = new Feedback("modalFeedback", new ContainerFeedbackMessageFilter(form));
+			form.add(modalFeedback);
+		}
+	}
 }

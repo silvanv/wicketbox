@@ -5,39 +5,39 @@ import java.io.Serializable;
 public class Task
     implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private String name = "default name";
-    private String desc;
+	private String name = "default name";
+	private String desc;
 
-    public Task() {
-    }
+	public Task() {
+	}
 
-    public Task(String name) {
-        this.name = name;
-    }
+	public Task(String name) {
+		this.name = name;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    /**
-     * @param name
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
+	/**
+	 * @param name
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getDesc() {
-        return desc;
-    }
+	public String getDesc() {
+		return desc;
+	}
 
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
 
-    @Override
-    public String toString() {
-        return "[" + name + "] [" + desc + "]";
-    }
+	@Override
+	public String toString() {
+		return "[" + name + "] [" + desc + "]";
+	}
 }

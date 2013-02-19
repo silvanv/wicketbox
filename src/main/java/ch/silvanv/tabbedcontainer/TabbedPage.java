@@ -18,83 +18,75 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 
 public class TabbedPage extends BasePage {
+	private static final long serialVersionUID = 1L;
 
-    private static final long serialVersionUID = 1L;
+	public TabbedPage() {
+		List<ITab> tabs = new ArrayList<ITab>();
+		tabs.add(new AbstractTab(new Model<String>("first tab")) {
+			private static final long serialVersionUID = 1L;
 
-    public TabbedPage() {
+			public Panel getPanel(String panelId) {
+				return new TabPanel1(panelId);
+			}
+		});
 
-        List<ITab> tabs = new ArrayList<ITab>();
-        tabs.add(new AbstractTab(new Model<String>("first tab")) {
+		tabs.add(new AbstractTab(new Model<String>("second tab")) {
+			private static final long serialVersionUID = 1L;
 
-            private static final long serialVersionUID = 1L;
+			public Panel getPanel(String panelId) {
+				return new TabPanel2(panelId);
+			}
+		});
 
-            public Panel getPanel(String panelId) {
-                return new TabPanel1(panelId);
-            }
-        });
+		add(new TabContainer("tabContainer", tabs));
+	}
 
-        tabs.add(new AbstractTab(new Model<String>("second tab")) {
+	// private static class TabContainer extends TabbedPanel<ITab> {
+	private static class TabContainer extends AjaxTabbedPanel<ITab> {
+		private static final long serialVersionUID = 1L;
 
-            private static final long serialVersionUID = 1L;
+		public TabContainer(String id, List<ITab> tabs) {
+			super(id, tabs);
+		}
 
-            public Panel getPanel(String panelId) {
-                return new TabPanel2(panelId);
-            }
-        });
+		// @Override
+		// protected String getSelectedTabCssClass() {
+		// return "active";
+		// }
+	}
 
-        add(new TabContainer("tabContainer", tabs));
-    }
+	private static class TabPanel1 extends Panel {
+		private static final long serialVersionUID = 1L;
 
-    // private static class TabContainer extends TabbedPanel<ITab> {
-    private static class TabContainer extends AjaxTabbedPanel<ITab> {
+		public TabPanel1(String id) {
+			super(id);
+		}
+	}
 
-        private static final long serialVersionUID = 1L;
+	private static class TabPanel2 extends Panel {
+		private static final long serialVersionUID = 1L;
 
-        public TabContainer(String id, List<ITab> tabs) {
-            super(id, tabs);
-        }
+		public TabPanel2(String id) {
+			super(id);
 
-        // @Override
-        // protected String getSelectedTabCssClass() {
-        // return "active";
-        // }
-    }
+			final Feedback feedbackPanel = new Feedback("feedback");
+			add(feedbackPanel);
 
-    private static class TabPanel1 extends Panel {
+			add(new Label("label", Model.of("bla")));
 
-        private static final long serialVersionUID = 1L;
+			Form<Task> form = new Form<Task>("form");
 
-        public TabPanel1(String id) {
-            super(id);
-        }
-    }
+			form.add(new AjaxButton("submit") {
+				private static final long serialVersionUID = 1L;
 
-    private static class TabPanel2 extends Panel {
+				@Override
+				protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
+					feedbackPanel.info("the form was submitted!");
+					target.add(feedbackPanel);
+				}
+			});
 
-        private static final long serialVersionUID = 1L;
-
-        public TabPanel2(String id) {
-            super(id);
-
-            final Feedback feedbackPanel = new Feedback("feedback");
-            add(feedbackPanel);
-
-            add(new Label("label", Model.of("bla")));
-
-            Form<Task> form = new Form<Task>("form");
-
-            form.add(new AjaxButton("submit") {
-
-                private static final long serialVersionUID = 1L;
-
-                @Override
-                protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-                    feedbackPanel.info("the form was submitted!");
-                    target.add(feedbackPanel);
-                }
-            });
-
-            add(form);
-        }
-    }
+			add(form);
+		}
+	}
 }

@@ -13,22 +13,22 @@ import org.apache.wicket.protocol.http.WebApplication;
  */
 public class WicketboxApplication extends WebApplication {
 	@Override
-    public Class<HomePage> getHomePage() {
-        return HomePage.class;
-    }
+	public Class<HomePage> getHomePage() {
+		return HomePage.class;
+	}
 
-    @Override
-    public void init() {
-        super.init();
-        
-        // mount points
-        mountPage("TabbedPage", TabbedPage.class);
-        mountPage("FormPage", FormPage.class);
-        mountPage("FacebookFeedPage", FacebookFeedPage.class);
-        mountPage("BehaviourPage", BehaviourPage.class);
-        mountPage("ModalPage", ModalPage.class);
+	@Override
+	public void init() {
+		super.init();
 
-        // configuration
-        getMarkupSettings().setStripWicketTags(true);
-    }
+		// mount points
+		mountPage("TabbedPage", TabbedPage.class);
+		mountPage("FormPage", FormPage.class);
+		mountPage("FacebookFeedPage", FacebookFeedPage.class);
+		mountPage("BehaviourPage", BehaviourPage.class);
+		mountPage("ModalPage", ModalPage.class);
+
+		// configuration
+		getMarkupSettings().setStripWicketTags(true);
+	}
 }

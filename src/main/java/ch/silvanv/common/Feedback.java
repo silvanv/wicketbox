@@ -14,14 +14,14 @@ public class Feedback extends FeedbackPanel {
 		super(id, filter);
 		setOutputMarkupPlaceholderTag(true);
 	}
-	
-    @Override
-    protected void onConfigure() {
-        if (anyMessage()) {
-            setVisibilityAllowed(true);
-        }
-        else {
-            setVisibilityAllowed(false);
-        }
-    }
+
+	@Override
+	protected void onConfigure() {
+		if (anyMessage()) {
+			setVisibilityAllowed(true);
+		}
+		else {
+			setVisibilityAllowed(false);
+		}
+	}
 }
