@@ -1,13 +1,13 @@
-package ch.silvanv.common;
+package ch.silvanv.wicketbox.common;
 
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 
-import ch.silvanv.behaviour.BehaviourPage;
-import ch.silvanv.facebookfeed.FacebookFeedPage;
-import ch.silvanv.formpage.FormPage;
-import ch.silvanv.modal.ModalPage;
-import ch.silvanv.tabbedcontainer.TabbedPage;
+import ch.silvanv.wicketbox.behaviour.BehaviourPage;
+import ch.silvanv.wicketbox.facebookfeed.FacebookFeedPage;
+import ch.silvanv.wicketbox.formpage.FormPage;
+import ch.silvanv.wicketbox.modal.ModalPage;
+import ch.silvanv.wicketbox.tabbedcontainer.TabbedPage;
 
 public abstract class BasePage extends WebPage {
 	private static final long serialVersionUID = 1L;

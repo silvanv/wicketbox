@@ -1,6 +1,6 @@
-package ch.silvanv.facebookfeed;
+package ch.silvanv.wicketbox.facebookfeed;
 
-import ch.silvanv.common.BasePage;
+import ch.silvanv.wicketbox.common.BasePage;
 
 import org.apache.wicket.markup.html.link.ExternalLink;
 import org.apache.wicket.markup.html.link.Link;

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+    <head></head>
+    <body>
+         <wicket:extend>
+            <div class="container">
+                <h5>Modal Page</h5>
+                
+                <div class="btn-toolbar">
+                    <div class="btn-group">
+    	                	<a wicket:id="modalDialogLink1" href="#" class="btn">Modal 1</a>
+    	            </div>
+    	            <div class="btn-group">
+    	                	<a wicket:id="modalDialogLink2" href="#" class="btn">Modal 2</a>
+                    </div>
+                    <div class="btn-group">
+                            <a href="#" onclick="$('#modalDialog2').modal('show'); return false;"class="btn">Modal 2A</a>
+                    </div>
+                    <div class="btn-group">
+                            <a href="#" onclick="$('#modalDialog2').modal('show'); return false;"class="btn">Modal 2B</a>
+                    </div>
+                </div>
+	            
+	            <span wicket:id="modalDialog1"></span>
+	            <span wicket:id="modalDialog2"></span>
+                
+                <div wicket:id="feedback" class="alert alert-success" />
+                
+            </div>
+         </wicket:extend>
+    </body>
+</html>

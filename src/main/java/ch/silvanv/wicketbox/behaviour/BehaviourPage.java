@@ -1,7 +1,7 @@
-package ch.silvanv.behaviour;
+package ch.silvanv.wicketbox.behaviour;
 
-import ch.silvanv.common.BasePage;
-import ch.silvanv.common.Feedback;
+import ch.silvanv.wicketbox.common.BasePage;
+import ch.silvanv.wicketbox.common.Feedback;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;

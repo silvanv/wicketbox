@@ -1,4 +1,4 @@
-package ch.silvanv.facebookfeed;
+package ch.silvanv.wicketbox.facebookfeed;
 
 public class PostOfferOnFacebookUrlModel extends PostOnFacebookUrlModel {
 	private static final long serialVersionUID = 1L;

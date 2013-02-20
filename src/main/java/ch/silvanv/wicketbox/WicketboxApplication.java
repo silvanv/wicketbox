@@ -1,10 +1,10 @@
-package ch.silvanv;
+package ch.silvanv.wicketbox;
 
-import ch.silvanv.behaviour.BehaviourPage;
-import ch.silvanv.facebookfeed.FacebookFeedPage;
-import ch.silvanv.formpage.FormPage;
-import ch.silvanv.modal.ModalPage;
-import ch.silvanv.tabbedcontainer.TabbedPage;
+import ch.silvanv.wicketbox.behaviour.BehaviourPage;
+import ch.silvanv.wicketbox.facebookfeed.FacebookFeedPage;
+import ch.silvanv.wicketbox.formpage.FormPage;
+import ch.silvanv.wicketbox.modal.ModalPage;
+import ch.silvanv.wicketbox.tabbedcontainer.TabbedPage;
 
 import org.apache.wicket.protocol.http.WebApplication;
 

@@ -1,8 +1,8 @@
-package ch.silvanv.formpage;
+package ch.silvanv.wicketbox.formpage;
 
-import ch.silvanv.Task;
-import ch.silvanv.common.BasePage;
-import ch.silvanv.common.Feedback;
+import ch.silvanv.wicketbox.Task;
+import ch.silvanv.wicketbox.common.BasePage;
+import ch.silvanv.wicketbox.common.Feedback;
 
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;

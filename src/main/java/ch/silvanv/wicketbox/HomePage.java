@@ -1,9 +1,9 @@
-package ch.silvanv;
+package ch.silvanv.wicketbox;
 
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.model.Model;
 
-import ch.silvanv.common.BasePage;
+import ch.silvanv.wicketbox.common.BasePage;
 
 public class HomePage extends BasePage {
 

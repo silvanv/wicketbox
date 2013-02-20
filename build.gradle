@@ -3,7 +3,7 @@ apply plugin: 'war'
 apply plugin: 'jetty'
 apply plugin: 'eclipse'
 
-group = 'ch.silvanv'
+group = 'ch.silvanv.wicketbox'
 version = '0.0.1-SNAPSHOT'
 
 repositories {
@@ -15,10 +15,17 @@ sourceSets.main.resources.srcDirs 'src/main/java'
 jettyRun.scanIntervalSeconds=1
 
 dependencies {
-  compile 'org.apache.wicket:wicket-core:6.2.0'
-  compile 'org.apache.wicket:wicket-extensions:6.2.0'
+  // wicket
+  compile 'org.apache.wicket:wicket-core:6.5.0'
+  compile 'org.apache.wicket:wicket-extensions:6.5.0'
 
+  // servlet
   compile 'javax.servlet:servlet-api:2.4'
 
-  testCompile 'junit:junit:4.8.2'
+  // logging dependencies
+  compile 'org.slf4j:slf4j-api:1.7.2'
+  compile 'ch.qos.logback:logback-classic:1.0.9'
+  
+  // test dependencies 
+  testCompile 'junit:junit-dep:4.10'
 }

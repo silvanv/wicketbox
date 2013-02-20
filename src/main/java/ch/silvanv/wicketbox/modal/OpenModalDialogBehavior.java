@@ -1,4 +1,4 @@
-package ch.silvanv.modal;
+package ch.silvanv.wicketbox.modal;
 
 import org.apache.wicket.ajax.AjaxEventBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;

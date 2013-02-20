@@ -1,4 +1,4 @@
-package ch.silvanv.behaviour;
+package ch.silvanv.wicketbox.behaviour;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxEventBehavior;

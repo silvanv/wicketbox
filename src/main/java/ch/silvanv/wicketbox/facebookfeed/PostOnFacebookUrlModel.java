@@ -1,4 +1,4 @@
-package ch.silvanv.facebookfeed;
+package ch.silvanv.wicketbox.facebookfeed;
 
 import org.apache.wicket.model.LoadableDetachableModel;
 

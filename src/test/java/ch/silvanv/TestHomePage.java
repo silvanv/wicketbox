@@ -4,8 +4,8 @@ import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
 import org.junit.Test;
 
-import ch.silvanv.HomePage;
-import ch.silvanv.WicketboxApplication;
+import ch.silvanv.wicketbox.HomePage;
+import ch.silvanv.wicketbox.WicketboxApplication;
 
 /**
  * Simple test using the WicketTester

@@ -1,4 +1,4 @@
-package ch.silvanv;
+package ch.silvanv.wicketbox;
 
 import java.io.Serializable;
 

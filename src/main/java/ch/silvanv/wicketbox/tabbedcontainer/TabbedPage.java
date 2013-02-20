@@ -1,8 +1,8 @@
-package ch.silvanv.tabbedcontainer;
+package ch.silvanv.wicketbox.tabbedcontainer;
 
-import ch.silvanv.Task;
-import ch.silvanv.common.BasePage;
-import ch.silvanv.common.Feedback;
+import ch.silvanv.wicketbox.Task;
+import ch.silvanv.wicketbox.common.BasePage;
+import ch.silvanv.wicketbox.common.Feedback;
 
 import java.util.ArrayList;
 import java.util.List;

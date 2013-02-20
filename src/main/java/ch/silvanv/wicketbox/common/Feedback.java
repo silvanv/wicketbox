@@ -1,4 +1,4 @@
-package ch.silvanv.common;
+package ch.silvanv.wicketbox.common;
 
 import org.apache.wicket.feedback.IFeedbackMessageFilter;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;

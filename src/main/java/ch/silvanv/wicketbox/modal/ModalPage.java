@@ -1,4 +1,4 @@
-package ch.silvanv.modal;
+package ch.silvanv.wicketbox.modal;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
@@ -12,9 +12,9 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 
-import ch.silvanv.Task;
-import ch.silvanv.common.BasePage;
-import ch.silvanv.common.Feedback;
+import ch.silvanv.wicketbox.Task;
+import ch.silvanv.wicketbox.common.BasePage;
+import ch.silvanv.wicketbox.common.Feedback;
 
 public class ModalPage extends BasePage {
 	private static final long serialVersionUID = 1L;
@@ -25,22 +25,30 @@ public class ModalPage extends BasePage {
 		feedback = new Feedback("feedback", new ComponentFeedbackMessageFilter(this));
 		add(feedback);
 
-		final ModalDialog<String> dialog1 = new ModalDialog<String>("modalDialog1", Model.of("Dialog Content 1"), Model.of("modalDialogTitle")) {
-
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public Component content(String id) {
-				return new Label("contentPanel", getModel());
-			}
-		};
-
+		final ModalDialog<String> dialog1 = createDialog1();
 		add(dialog1);
 		add(new ModalDialogLink("modalDialogLink1", dialog1));
 
-		// //////////////////
+		final ModalDialog<Task> dialog2 = createDialog2();
+		add(dialog2);
+		add(new ModalDialogLink("modalDialogLink2", dialog2));
+	}
+	
+	private ModalDialog<String> createDialog1() {
+	  final ModalDialog<String> dialog1 = new ModalDialog<String>("modalDialog1", Model.of("Dialog Content 1"), Model.of("modalDialogTitle")) {
+	    
+	    private static final long serialVersionUID = 1L;
+	    
+	    @Override
+	    public Component content(String id) {
+	      return new Label("contentPanel", getModel());
+	    }
+	  };
+	  return dialog1;
+	}
 
-		final ModalDialog<Task> dialog2 = new ModalDialog<Task>("modalDialog2", new CompoundPropertyModel<Task>(new Task()), Model.of("modalDialogTitle")) {
+  private ModalDialog<Task> createDialog2() {
+    final ModalDialog<Task> dialog2 = new ModalDialog<Task>("modalDialog2", new CompoundPropertyModel<Task>(new Task()), Model.of("modalDialogTitle")) {
 			private static final long serialVersionUID = 1L;
 
 			@Override
@@ -48,17 +56,16 @@ public class ModalPage extends BasePage {
 				return new FormPanel(id, getModel());
 			}
 
-			// overwritten to refresh feedback
+			// overwritten to refresh feedback panel
 			@Override
 			protected boolean onSubmit(AjaxRequestTarget target, Form<Task> form) {
 				target.add(feedback);
 				return super.onSubmit(target, form);
 			}
 		};
-
-		add(dialog2);
-		add(new ModalDialogLink("modalDialogLink2", dialog2));
-	}
+		dialog2.setRenderContentLazy();
+    return dialog2;
+  }
 
 	private class FormPanel extends GenericPanel<Task> {
 		private static final long serialVersionUID = 1L;

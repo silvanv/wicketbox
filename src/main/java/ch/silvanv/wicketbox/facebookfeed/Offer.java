@@ -1,4 +1,4 @@
-package ch.silvanv.facebookfeed;
+package ch.silvanv.wicketbox.facebookfeed;
 
 public class Offer {
 	public String getDescription() {
