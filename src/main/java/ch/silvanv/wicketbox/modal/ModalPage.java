@@ -1,5 +1,7 @@
 package ch.silvanv.wicketbox.modal;
 
+import static org.apache.wicket.model.Model.of;
+
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.feedback.ComponentFeedbackMessageFilter;
@@ -10,7 +12,6 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.GenericPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
-import org.apache.wicket.model.Model;
 
 import ch.silvanv.wicketbox.Task;
 import ch.silvanv.wicketbox.common.BasePage;
@@ -35,9 +36,7 @@ public class ModalPage extends BasePage {
   }
 
   private ModalDialog<String> createDialog1() {
-    final ModalDialog<String> dialog1 = new ModalDialog<String>("modalDialog1", Model.of("Dialog Content 1"),
-        Model.of("modalDialogTitle")) {
-
+    final ModalDialog<String> dialog1 = new ModalDialog<String>("modalDialog1", of("Dialog Content 1"), of("modalDialogTitle")) {
       private static final long serialVersionUID = 1L;
 
       @Override
@@ -49,8 +48,7 @@ public class ModalPage extends BasePage {
   }
 
   private ModalDialog<Task> createDialog2() {
-    final ModalDialog<Task> dialog2 = new ModalDialog<Task>("modalDialog2",
-        new CompoundPropertyModel<Task>(new Task()), Model.of("modalDialogTitle")) {
+    final ModalDialog<Task> dialog2 = new ModalDialog<Task>("modalDialog2", new CompoundPropertyModel<Task>(new Task()), of("modalDialogTitle")) {
       private static final long serialVersionUID = 1L;
 
       @Override
