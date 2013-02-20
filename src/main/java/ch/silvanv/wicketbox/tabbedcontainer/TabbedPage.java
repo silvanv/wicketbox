@@ -1,9 +1,5 @@
 package ch.silvanv.wicketbox.tabbedcontainer;
 
-import ch.silvanv.wicketbox.Task;
-import ch.silvanv.wicketbox.common.BasePage;
-import ch.silvanv.wicketbox.common.Feedback;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,76 +13,80 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 
+import ch.silvanv.wicketbox.Task;
+import ch.silvanv.wicketbox.common.BasePage;
+import ch.silvanv.wicketbox.common.Feedback;
+
 public class TabbedPage extends BasePage {
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	public TabbedPage() {
-		List<ITab> tabs = new ArrayList<ITab>();
-		tabs.add(new AbstractTab(new Model<String>("first tab")) {
-			private static final long serialVersionUID = 1L;
+  public TabbedPage() {
+    List<ITab> tabs = new ArrayList<ITab>();
+    tabs.add(new AbstractTab(new Model<String>("first tab")) {
+      private static final long serialVersionUID = 1L;
 
-			public Panel getPanel(String panelId) {
-				return new TabPanel1(panelId);
-			}
-		});
+      public Panel getPanel(String panelId) {
+        return new TabPanel1(panelId);
+      }
+    });
 
-		tabs.add(new AbstractTab(new Model<String>("second tab")) {
-			private static final long serialVersionUID = 1L;
+    tabs.add(new AbstractTab(new Model<String>("second tab")) {
+      private static final long serialVersionUID = 1L;
 
-			public Panel getPanel(String panelId) {
-				return new TabPanel2(panelId);
-			}
-		});
+      public Panel getPanel(String panelId) {
+        return new TabPanel2(panelId);
+      }
+    });
 
-		add(new TabContainer("tabContainer", tabs));
-	}
+    add(new TabContainer("tabContainer", tabs));
+  }
 
-	// private static class TabContainer extends TabbedPanel<ITab> {
-	private static class TabContainer extends AjaxTabbedPanel<ITab> {
-		private static final long serialVersionUID = 1L;
+  // private static class TabContainer extends TabbedPanel<ITab> {
+  private static class TabContainer extends AjaxTabbedPanel<ITab> {
+    private static final long serialVersionUID = 1L;
 
-		public TabContainer(String id, List<ITab> tabs) {
-			super(id, tabs);
-		}
+    public TabContainer(String id, List<ITab> tabs) {
+      super(id, tabs);
+    }
 
-		// @Override
-		// protected String getSelectedTabCssClass() {
-		// return "active";
-		// }
-	}
+    // @Override
+    // protected String getSelectedTabCssClass() {
+    // return "active";
+    // }
+  }
 
-	private static class TabPanel1 extends Panel {
-		private static final long serialVersionUID = 1L;
+  private static class TabPanel1 extends Panel {
+    private static final long serialVersionUID = 1L;
 
-		public TabPanel1(String id) {
-			super(id);
-		}
-	}
+    public TabPanel1(String id) {
+      super(id);
+    }
+  }
 
-	private static class TabPanel2 extends Panel {
-		private static final long serialVersionUID = 1L;
+  private static class TabPanel2 extends Panel {
+    private static final long serialVersionUID = 1L;
 
-		public TabPanel2(String id) {
-			super(id);
+    public TabPanel2(String id) {
+      super(id);
 
-			final Feedback feedbackPanel = new Feedback("feedback");
-			add(feedbackPanel);
+      final Feedback feedbackPanel = new Feedback("feedback");
+      add(feedbackPanel);
 
-			add(new Label("label", Model.of("bla")));
+      add(new Label("label", Model.of("bla")));
 
-			Form<Task> form = new Form<Task>("form");
+      Form<Task> form = new Form<Task>("form");
 
-			form.add(new AjaxButton("submit") {
-				private static final long serialVersionUID = 1L;
+      form.add(new AjaxButton("submit") {
+        private static final long serialVersionUID = 1L;
 
-				@Override
-				protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-					feedbackPanel.info("the form was submitted!");
-					target.add(feedbackPanel);
-				}
-			});
+        @Override
+        protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
+          feedbackPanel.info("the form was submitted!");
+          target.add(feedbackPanel);
+        }
+      });
 
-			add(form);
-		}
-	}
+      add(form);
+    }
+  }
 }

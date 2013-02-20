@@ -12,21 +12,21 @@ import ch.silvanv.wicketbox.WicketboxApplication;
  */
 public class TestHomePage
 {
-	private WicketTester tester;
+  private WicketTester tester;
 
-	@Before
-	public void setUp()
-	{
-		tester = new WicketTester(new WicketboxApplication());
-	}
+  @Before
+  public void setUp()
+  {
+    tester = new WicketTester(new WicketboxApplication());
+  }
 
-	@Test
-	public void homepageRendersSuccessfully()
-	{
-		// start and render the test page
-		tester.startPage(HomePage.class);
+  @Test
+  public void homepageRendersSuccessfully()
+  {
+    // start and render the test page
+    tester.startPage(HomePage.class);
 
-		// assert rendered page class
-		tester.assertRenderedPage(HomePage.class);
-	}
+    // assert rendered page class
+    tester.assertRenderedPage(HomePage.class);
+  }
 }

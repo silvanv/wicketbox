@@ -10,13 +10,13 @@ import ch.silvanv.wicketbox.modal.ModalPage;
 import ch.silvanv.wicketbox.tabbedcontainer.TabbedPage;
 
 public abstract class BasePage extends WebPage {
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	public BasePage() {
-		add(new BookmarkablePageLink<Void>("tabbedPageLink", TabbedPage.class));
-		add(new BookmarkablePageLink<Void>("formPageLink", FormPage.class));
-		add(new BookmarkablePageLink<Void>("facebookFeedPageLink", FacebookFeedPage.class));
-		add(new BookmarkablePageLink<Void>("behaviourPageLink", BehaviourPage.class));
-		add(new BookmarkablePageLink<Void>("modalPageLink", ModalPage.class));
-	}
+  public BasePage() {
+    add(new BookmarkablePageLink<Void>("tabbedPageLink", TabbedPage.class));
+    add(new BookmarkablePageLink<Void>("formPageLink", FormPage.class));
+    add(new BookmarkablePageLink<Void>("facebookFeedPageLink", FacebookFeedPage.class));
+    add(new BookmarkablePageLink<Void>("behaviourPageLink", BehaviourPage.class));
+    add(new BookmarkablePageLink<Void>("modalPageLink", ModalPage.class));
+  }
 }
